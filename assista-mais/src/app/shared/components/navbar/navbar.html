@@ -1,0 +1,43 @@
+<header class="nav">
+  <div class="container nav__conteudo">
+    <a routerLink="/" class="nav__logo">Assista<span>+</span></a>
+
+    <form class="nav__busca" (submit)="buscar($event)">
+      <input
+        #campo
+        type="search"
+        name="q"
+        autocomplete="off"
+        placeholder="Buscar filmes, diretores, atores..."
+        [value]="termo()"
+        (input)="digitar(campo.value)"
+        (focus)="aberto.set(true)"
+        (blur)="aberto.set(false)"
+      />
+
+      @if (aberto() && termo().trim().length >= 2) {
+        <!-- o mousedown evita que o input perca o foco antes do clique -->
+        <ul class="sugestoes" (mousedown)="$event.preventDefault()">
+          @for (filme of sugestoes(); track filme.id) {
+            <li>
+              <a [routerLink]="['/filme', filme.id]" (click)="selecionar()">
+                <img [src]="filme.posterUrl" alt="" />
+                <span>
+                  <strong>{{ filme.titulo }}</strong>
+                  <small>{{ filme.dataLancamento.slice(0, 4) }} · {{ filme.diretor }}</small>
+                </span>
+              </a>
+            </li>
+          } @empty {
+            <li class="sugestoes__vazio">Nenhum filme encontrado</li>
+          }
+        </ul>
+      }
+    </form>
+
+    <div class="nav__usuario">
+      <span>Olá, {{ auth.usuario()?.nome }}</span>
+      <button class="botao botao--secundario" type="button" (click)="sair()">Sair</button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,23 @@
+<section class="busca">
+  @if (q()) {
+    <h1 class="busca__titulo">Resultados para “{{ q() }}”</h1>
+    <p class="busca__contagem">{{ resultados().length }} filme(s) encontrado(s)</p>
+  } @else {
+    <h1 class="busca__titulo">Busca</h1>
+    <p class="busca__contagem">Digite um título, diretor ou ator na barra acima.</p>
+  }
+
+  <div class="busca__grade">
+    @for (filme of resultados(); track filme.id) {
+      <a class="cartao-filme" [routerLink]="['/filme', filme.id]">
+        <img [src]="filme.posterUrl" [alt]="filme.titulo" />
+        <p class="cartao-filme__titulo">{{ filme.titulo }}</p>
+        <p class="cartao-filme__ano">{{ filme.dataLancamento.slice(0, 4) }} · {{ filme.diretor }}</p>
+      </a>
+    } @empty {
+      @if (q()) {
+        <p class="busca__vazio">Nenhum filme encontrado.</p>
+      }
+    }
+  </div>
+</section>

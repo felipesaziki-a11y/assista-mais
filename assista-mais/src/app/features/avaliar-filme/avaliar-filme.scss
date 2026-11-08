@@ -1,0 +1,54 @@
+.avaliar {
+  max-width: 760px; margin-inline: auto;
+
+  &__filme {
+    display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;
+    img { width: 90px; border-radius: 8px; }
+    h1 span { color: var(--texto-suave); font-weight: 400; }
+  }
+  &__rotulo { font-size: .85rem; color: var(--texto-suave); }
+  &__form h2 { margin-block: 2rem 1rem; font-size: 1.2rem; }
+}
+
+.porque {
+  padding: 1.5rem; border-radius: var(--raio);
+  background: linear-gradient(135deg, rgba(124, 92, 255, .18), var(--superficie));
+  border: 1px solid var(--destaque);
+
+  h2 { font-size: 1.1rem; margin-bottom: 1rem; }
+  ul { list-style: none; display: grid; gap: 1rem; }
+  li { display: grid; gap: .35rem; font-size: .9rem; color: var(--texto-suave); strong { display: block; color: var(--texto); } }
+
+  &__peso {
+    height: 6px; border-radius: 6px; background: var(--superficie-2); overflow: hidden;
+    &::after { content: ''; display: block; height: 100%; width: var(--peso); background: var(--destaque); }
+  }
+}
+
+.aspecto {
+  border: 0; margin-bottom: 1.5rem;
+  legend { margin-bottom: .5rem; font-weight: 600; }
+  &--geral { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--borda); }
+}
+
+.nivel {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--borda); border-radius: var(--raio); overflow: hidden;
+
+  input { position: absolute; opacity: 0; }
+  label {
+    padding: .8rem .5rem; text-align: center; font-size: .9rem; cursor: pointer;
+    background: var(--superficie); color: var(--texto-suave);
+    border-right: 1px solid var(--borda); transition: .2s;
+    &:last-of-type { border-right: 0; }
+    &:hover { background: var(--superficie-2); }
+  }
+  input:checked + label { background: var(--destaque); color: #fff; font-weight: 600; }
+  input:focus-visible + label { outline: 2px solid var(--texto); outline-offset: -2px; }
+
+  &--geral {
+    input:checked + label[data-tipo='gostei'] { background: var(--positivo); color: #0e0f13; }
+    input:checked + label[data-tipo='neutro'] { background: var(--neutro); color: #0e0f13; }
+    input:checked + label[data-tipo='nao'] { background: var(--negativo); color: #fff; }
+  }
+}

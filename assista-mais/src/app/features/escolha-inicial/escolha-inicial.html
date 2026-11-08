@@ -1,0 +1,44 @@
+<section class="escolha container">
+  <header class="escolha__topo">
+    <h1>O que você gosta de assistir?</h1>
+    <p>Escolha pelo menos {{ minimo }} filmes que você ama. Vamos usar gêneros, diretores, elenco e época para montar suas recomendações.</p>
+    <input
+      #busca
+      class="escolha__busca"
+      type="search"
+      placeholder="Pesquisar por filme ou diretor..."
+      (input)="termo.set(busca.value)"
+    />
+  </header>
+
+  <div class="escolha__grade">
+    @for (filme of filmes(); track filme.id) {
+      <label class="poster">
+        <input
+          type="checkbox"
+          [checked]="estaSelecionado(filme.id)"
+          (change)="alternar(filme.id)"
+        />
+        <img [src]="filme.posterUrl" [alt]="filme.titulo" />
+        <span class="poster__check">✓</span>
+        <span class="poster__titulo">{{ filme.titulo }} ({{ filme.dataLancamento.slice(0, 4) }})</span>
+      </label>
+    } @empty {
+      <p class="escolha__vazio">Nenhum filme encontrado.</p>
+    }
+  </div>
+
+  <footer class="escolha__rodape">
+    <div class="container escolha__rodape-conteudo">
+      <span><strong>{{ total() }}</strong> de {{ minimo }} escolhidos</span>
+      <button
+        class="botao botao--grande"
+        type="button"
+        [disabled]="!podeContinuar()"
+        (click)="continuar()"
+      >
+        Continuar
+      </button>
+    </div>
+  </footer>
+</section>

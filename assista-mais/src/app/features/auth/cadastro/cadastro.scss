@@ -1,0 +1,24 @@
+.auth {
+  min-height: 100vh; display: grid; grid-template-columns: 1.1fr 1fr;
+
+  &__ilustracao {
+    display: flex; flex-direction: column; justify-content: center; gap: 1rem; padding: 4rem;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(124, 92, 255, .35), transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(62, 207, 142, .2), transparent 50%),
+      var(--superficie);
+
+    h1 { font-size: 3rem; span { color: var(--destaque); } }
+    p { max-width: 380px; font-size: 1.15rem; color: var(--texto-suave); }
+  }
+
+  &__painel { display: grid; place-items: center; padding: 2rem; }
+  &__formulario { width: min(380px, 100%); h2 { font-size: 1.8rem; } }
+  &__sub { color: var(--texto-suave); margin-bottom: 2rem; }
+  &__alternativa { margin-top: 1.5rem; text-align: center; font-size: .9rem; color: var(--texto-suave); a { color: var(--destaque); font-weight: 600; } }
+}
+
+@media (max-width: 800px) {
+  .auth { grid-template-columns: 1fr; }
+  .auth__ilustracao { display: none; }
+}

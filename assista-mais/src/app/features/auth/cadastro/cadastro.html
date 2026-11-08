@@ -1,0 +1,43 @@
+<section class="auth">
+  <div class="auth__ilustracao">
+    <h1>Assista<span>+</span></h1>
+    <p>Descubra filmes que combinam com você e veja onde assistir.</p>
+  </div>
+
+  <div class="auth__painel">
+    <form class="auth__formulario" (ngSubmit)="cadastrar()">
+      <h2>Criar conta</h2>
+      <p class="auth__sub">Leva menos de um minuto.</p>
+
+      <div class="campo">
+        <label for="nome">Nome</label>
+        <input id="nome" name="nome" type="text" [(ngModel)]="nome" placeholder="Seu nome" />
+      </div>
+
+      <div class="campo">
+        <label for="email">E-mail</label>
+        <input id="email" name="email" type="email" [(ngModel)]="email" placeholder="voce@email.com" />
+      </div>
+
+      <div class="campo">
+        <label for="senha">Senha</label>
+        <input id="senha" name="senha" type="password" [(ngModel)]="senha" placeholder="••••••••" />
+      </div>
+
+      <div class="campo">
+        <label for="confirmar">Confirmar senha</label>
+        <input id="confirmar" name="confirmar" type="password" [(ngModel)]="confirmar" placeholder="••••••••" />
+      </div>
+
+      @if (erro()) {
+        <p class="auth__erro">{{ erro() }}</p>
+      }
+
+      <button class="botao botao--bloco" type="submit">Criar conta</button>
+
+      <p class="auth__alternativa">
+        Já tem conta? <a routerLink="/login">Entrar</a>
+      </p>
+    </form>
+  </div>
+</section>

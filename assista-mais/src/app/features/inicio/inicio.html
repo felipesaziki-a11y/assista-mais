@@ -1,0 +1,22 @@
+<section class="inicio">
+  <h1 class="inicio__titulo">Feito para você</h1>
+
+  @for (fileira of fileiras(); track fileira.titulo) {
+    <section class="fileira">
+      <header class="fileira__cabecalho">
+        <h2 class="fileira__titulo">{{ fileira.titulo }}</h2>
+        <p class="fileira__motivo">{{ fileira.motivo }}</p>
+      </header>
+
+      <div class="fileira__lista">
+        @for (filme of fileira.filmes; track filme.id) {
+          <a class="cartao-filme" [routerLink]="['/filme', filme.id]">
+            <img [src]="filme.posterUrl" [alt]="filme.titulo" />
+            <p class="cartao-filme__titulo">{{ filme.titulo }}</p>
+            <p class="cartao-filme__ano">{{ filme.dataLancamento.slice(0, 4) }}</p>
+          </a>
+        }
+      </div>
+    </section>
+  }
+</section>

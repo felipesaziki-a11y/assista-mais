@@ -1,0 +1,55 @@
+@if (filme(); as f) {
+  <article class="filme">
+    <div class="filme__topo">
+      <img class="filme__poster" [src]="f.posterUrl" [alt]="'Pôster de ' + f.titulo" />
+
+      <div class="filme__info">
+        <h1>{{ f.titulo }} <span>({{ f.dataLancamento.slice(0, 4) }})</span></h1>
+
+        <div class="filme__tags">
+          @for (g of f.generos; track g) {
+            <span class="tag">{{ g }}</span>
+          }
+          <span class="tag">{{ f.pais }}</span>
+        </div>
+
+        <p class="filme__sinopse">{{ f.sinopse }}</p>
+
+        <dl class="filme__dados">
+          <div><dt>Diretor</dt><dd>{{ f.diretor }}</dd></div>
+          <div><dt>Lançamento</dt><dd>{{ f.dataLancamento | date: 'dd/MM/yyyy' }}</dd></div>
+          <div><dt>País</dt><dd>{{ f.pais }}</dd></div>
+          <div><dt>Elenco</dt><dd>{{ f.elenco.join(', ') }}</dd></div>
+        </dl>
+
+        <a class="botao botao--grande" [routerLink]="['/filme', f.id, 'avaliar']">✔ Já assisti</a>
+      </div>
+    </div>
+
+    <section class="bloco">
+      <h2>Avaliações</h2>
+      <div class="notas">
+        @for (a of f.avaliacoes; track a.fonte) {
+          <div class="nota">
+            <strong>{{ a.nota }}</strong><span>/{{ a.escala }}</span>
+            <p>{{ a.fonte }}</p>
+          </div>
+        }
+      </div>
+    </section>
+
+    <section class="bloco">
+      <h2>Onde assistir</h2>
+      <div class="plataformas">
+        @for (p of f.plataformas; track p.nome + p.tipo) {
+          <div class="plataforma">
+            <strong>{{ p.nome }}</strong>
+            <span>{{ p.tipo }}</span>
+          </div>
+        }
+      </div>
+    </section>
+  </article>
+} @else {
+  <p>Filme não encontrado. <a routerLink="/">Voltar ao início</a></p>
+}

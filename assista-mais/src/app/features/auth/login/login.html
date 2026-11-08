@@ -1,0 +1,35 @@
+<section class="auth">
+  <div class="auth__ilustracao">
+    <h1>Assista
+        <span>+</span>
+    </h1>
+    <p>Descubra filmes que combinam com você e veja onde assistir.</p>
+  </div>
+
+  <div class="auth__painel">
+    <form class="auth__formulario" (ngSubmit)="entrar()">
+        <h2>Entrar</h2>
+        <p class="auth__sub">Bem-vindo de volta!</p>
+
+        <div class="campo">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" [(ngModel)]="email" placeholder="voce@email.com" />
+        </div>
+
+        <div class="campo">
+            <label for="senha">Senha</label>
+            <input id="senha" name="senha" type="password" [(ngModel)]="senha" placeholder="••••••••" />
+        </div>
+
+        @if (erro()) {
+            <p class="auth__erro">{{ erro() }}</p>
+        }
+
+        <button class="botao botao--bloco" type="submit">Entrar</button>
+
+        <p class="auth__alternativa">
+            Ainda não tem conta? <a routerLink="/cadastro">Cadastre-se</a>
+        </p>
+    </form>
+  </div>
+</section>

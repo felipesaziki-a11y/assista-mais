@@ -1,0 +1,74 @@
+@if (filme(); as f) {
+  <section class="avaliar">
+    <header class="avaliar__filme">
+      <img [src]="f.posterUrl" [alt]="f.titulo" />
+      <div>
+        <p class="avaliar__rotulo">Você assistiu</p>
+        <h1>{{ f.titulo }} <span>({{ f.dataLancamento.slice(0, 4) }})</span></h1>
+      </div>
+    </header>
+
+    @if (motivos().length) {
+      <aside class="porque">
+        <h2>Por que recomendamos este filme?</h2>
+        <ul>
+          @for (m of motivos(); track m.aspecto) {
+            <li>
+              <span class="porque__peso" [style.--peso]="m.peso + '%'"></span>
+              <strong>{{ m.rotulo }}</strong> {{ m.detalhe }}
+            </li>
+          }
+        </ul>
+      </aside>
+    }
+
+    <div class="avaliar__form">
+      <h2>Quais aspectos foram relevantes para você?</h2>
+
+      @for (a of aspectos; track a.chave) {
+        <fieldset class="aspecto">
+          <legend>{{ a.rotulo }}</legend>
+          <div class="nivel">
+            @for (n of niveis; track n.valor) {
+              <input
+                type="radio"
+                [name]="a.chave"
+                [id]="a.chave + '-' + n.valor"
+                [checked]="nivelDe(a.chave) === n.valor"
+                (change)="escolherNivel(a.chave, n.valor)"
+              />
+              <label [attr.for]="a.chave + '-' + n.valor">{{ n.rotulo }}</label>
+            }
+          </div>
+        </fieldset>
+      }
+
+      <fieldset class="aspecto aspecto--geral">
+        <legend>Avaliação geral</legend>
+        <div class="nivel nivel--geral">
+          @for (g of gerais; track g.valor) {
+            <input
+              type="radio"
+              name="geral"
+              [id]="'geral-' + g.valor"
+              [checked]="geral() === g.valor"
+              (change)="geral.set(g.valor)"
+            />
+            <label [attr.for]="'geral-' + g.valor" [attr.data-tipo]="g.tipo">{{ g.rotulo }}</label>
+          }
+        </div>
+      </fieldset>
+
+      <button
+        class="botao botao--grande botao--bloco"
+        type="button"
+        [disabled]="!podeSalvar()"
+        (click)="salvar()"
+      >
+        Salvar avaliação
+      </button>
+    </div>
+  </section>
+} @else {
+  <p>Filme não encontrado.</p>
+}

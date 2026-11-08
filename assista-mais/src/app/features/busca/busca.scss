@@ -1,0 +1,9 @@
+.busca {
+  &__titulo { font-size: 1.8rem; }
+  &__contagem { margin: .25rem 0 2rem; color: var(--texto-suave); }
+  &__grade {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1.5rem;
+    .cartao-filme { width: 100%; }
+  }
+  &__vazio { grid-column: 1 / -1; color: var(--texto-suave); }
+}
